@@ -64,7 +64,7 @@ function dkan_configure_form($form, &$form_state, &$install_state){
       1 => st('Receive e-mail notifications about DKAN releases and enhancements'),
     ),
     '#default_value' => array(1, 2),
-    '#description' => st('<a href="@drupal">NuCivic</a>. maintainer of DKAN, will send you emails about: <ul> <li> DKAN Releases </li> <li>Important security notifications</li> <li>DKAN feature updates and enhancements</li> </ul>', array('@drupal' => 'http://drupal.org')),
+    '#description' => st('<a href="@nucivic" target="_blank">NuCivic</a>, maintainer of DKAN, will send you emails about: <ul> <li> DKAN Releases </li> <li>Important security notifications</li> <li>DKAN feature updates and enhancements</li> </ul>', array('@drupal' => 'http://nucivic.com')),
     '#weight' => 16,
   );
 
@@ -103,6 +103,9 @@ function dkan_configure_form_submit($form, &$form_state){
     if ($form_state['values']['update_status_module'][2]) {
       variable_set('update_notify_emails', array($form_state['values']['account']['mail']));
     }
+  }
+  if ($form_state['values']['dkan_email_update'][1]) {
+    module_enable(array('nucivic_connector'), FALSE);
   }
 
   $account = user_load(1);

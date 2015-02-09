@@ -67,6 +67,12 @@ projects[imagecache_actions][download][revision] = cd19d2a
 projects[imagecache_actions][subdir] = contrib
 projects[imagecache_actions][type] = module
 
+projects[nucivic_connector][download][type] = git
+projects[nucivic_connector][download][url] = git@github.com:NuCivic/nucivic_connector.git
+projects[nucivic_connector][download][branch] = 7.x-1.x
+projects[nucivic_connector][subdir] = contrib
+projects[nucivic_connector][type] = module
+
 ; Themes
 projects[omega][version] = 3.1
 projects[omega][patch][1828552] = http://drupal.org/files/1828552-omega-hook_views_mini_pager.patch
