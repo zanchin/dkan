@@ -16,6 +16,7 @@ dependencies[] = number
 dependencies[] = path
 dependencies[] = rdf
 dependencies[] = taxonomy
+dependencies[] = locale
 
 ; Contrib
 dependencies[] = admin_menu
