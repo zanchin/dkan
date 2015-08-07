@@ -35,6 +35,7 @@ dependencies[] = pathauto
 dependencies[] = rdfui
 dependencies[] = rdfx
 dependencies[] = restws
+dependencies[] = role_export
 dependencies[] = rules
 dependencies[] = search_api
 dependencies[] = services
