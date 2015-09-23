@@ -26,7 +26,7 @@ projects[visualization_entity][type] = module
 
 projects[visualization_entity_charts][download][type] = git
 projects[visualization_entity_charts][download][url] = https://github.com/NuCivic/visualization_entity_charts.git
-projects[visualization_entity_charts][download][revision] = 934fd1d65dcd6700b43a3912b0af63319215ef31
+projects[visualization_entity_charts][download][revision] = 902393db995dd5c7e8a75b6945e3066ab7112a5f
 projects[visualization_entity_charts][type] = module
 
 ; Includes, since we're doing non-recusive
