@@ -1,0 +1,73 @@
+version: 0.0.0
+commands:
+  ps:
+    cmd: "docker-compose ps {{args}}"
+    usage: List the running docker-compose containers.
+
+  up:
+    cmd: "docker-compose up -d {{args}}"
+    usage: List the running docker-compose containers.
+
+  start:
+    cmd: "docker-compose start {{args}}"
+    usage: Start the docker compose-containers.
+
+  stop:
+    cmd: "docker-compose stop {{args}}"
+    usage: Stop the docker-compose containers.
+
+  restart:
+    cmd: "docker-compose restart {{args}}"
+    usage: Restart the docker-compose containers.
+
+  drush:
+    cmd: "docker-compose run cli drush --root=docroot {{args}}"
+    usage: Run drush commands in the cli service container.
+
+  bash:
+    cmd: "docker-compose run {{args}} bash"
+    usage: Start a shell in the container (like ssh without actual ssh).
+
+  mysql:
+    cmd: "docker exec -it $(docker-compose ps -q cli) bash -c 'mysql -u$DB_ENV_MYSQL_USER -p$DB_ENV_MYSQL_PASSWORD -h$DB_PORT_3306_TCP_ADDR $DB_ENV_MYSQL_DATABASE'"
+    usage: Connect to the default mysql database client.
+
+  mysql-import:
+    cmd: "docker exec -i $(docker-compose ps -q cli) bash -c 'mysql -u$DB_ENV_MYSQL_USER -p$DB_ENV_MYSQL_PASSWORD -h$DB_PORT_3306_TCP_ADDR $DB_ENV_MYSQL_DATABASE'"
+    usage: Import data into the default mysql database. `ahoy mysql-import < my-backup.sql`
+
+  mysql-dump:
+    cmd: "docker exec -i $(docker-compose ps -q cli) bash -c 'mysqldump -u$DB_ENV_MYSQL_USER -p$DB_ENV_MYSQL_PASSWORD -h$DB_PORT_3306_TCP_ADDR $DB_ENV_MYSQL_DATABASE'"
+    usage: Connect to the default mysql database. Supports piping of data into the command.
+
+  behat:
+    cmd: 'docker-compose run cli bash -c "cd docroot/test && bin/behat -p docker {{args}}"'
+    usage: Run the data_starter behat tests within the container.
+
+  dkan-behat:
+    cmd: 'docker-compose run cli bash -c "cd docroot/profiles/dkan/test && bin/behat -p docker {{args}}"'
+    usage: Run the DKAN behat tests within the container.
+
+  dkan-remake:
+    cmd: 'docker-compose run cli bash -c "drush -y make --no-core --contrib-destination=./docroot/profiles/dkan/ ./docroot/profiles/dkan/drupal-org.make --no-recursion --concurrency=3"'
+    usage: Run the DKAN behat tests within the container.
+
+  behat-init:
+    cmd: 'docker-compose run cli bash -c "cd docroot/test && composer install --prefer-source --no-interaction"'
+    usage: Use composer to install behat dependencies.
+
+  docker-nuke-all:
+    cmd: 'docker rm -f $(docker ps -a -q)'
+    usage: Remove all containers, including the running ones.
+
+  docker-nuke-all-images:
+    cmd: 'docker rmi $(docker images -q)'
+    usage: Delete all images
+
+  dkan-reinstall:
+    cmd: 'ahoy drush -- si dkan -y ; ahoy drush --  en custom_config -y ; ahoy drush -- fra -y'
+    usage: Delete all images
+
+  dkan-reinstall-test:
+    cmd: 'ahoy reinstall && ahoy dkan-behat'
+    usage: Delete all images
