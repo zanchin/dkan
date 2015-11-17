@@ -1,22 +1,26 @@
 version: 0.0.0
 commands:
-  ps:
-    cmd: "docker-compose ps {{args}}"
-    usage: List the running docker-compose containers.
+  dkan-build-site:
+    cmd: "drush make --prepare-install drupal-org-core.make docroot --yes && ln -s ../../../dkan docroot/profiles/dkan && drush si minimal --root=docroot --sites-subdir=default --db-url={{args}}"
+    usage: 'Builds a fully operational drupal site for dkan development in ./docroot. You must pass in the database url. Note: to install dkan also run dkan-remake and dkan-reinstall.'
 
-  up:
+  dkan-remake:
+    cmd: 'drush -y make --no-core --contrib-destination=./ drupal-org.make --no-recursion --concurrency=3'
+    usage: Rebuild all the dkan projects from the drupal-org.make file.
+
+  dkan-reinstall:
+    cmd:  'drush si dkan --root=docroot --account-name=admin --account-pass=admin  --site-name="DKAN" install_configure_form.update_status_module="array(FALSE,FALSE)" --yes'
+    usage: Rebuild all the dkan projects from the drupal-org.make file.
+
+  docker-up:
     cmd: "docker-compose up -d {{args}}"
     usage: List the running docker-compose containers.
 
-  start:
-    cmd: "docker-compose start {{args}}"
-    usage: Start the docker compose-containers.
-
-  stop:
+  docker-stop:
     cmd: "docker-compose stop {{args}}"
     usage: Stop the docker-compose containers.
 
-  restart:
+  docker-restart:
     cmd: "docker-compose restart {{args}}"
     usage: Restart the docker-compose containers.
 
