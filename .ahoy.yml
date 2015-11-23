@@ -13,7 +13,7 @@ commands:
     usage: Rebuild all the dkan projects from the drupal-org.make file.
 
   dkan-reinstall:
-    cmd:  'drush si dkan --root=docroot --account-name=admin --account-pass=admin  --site-name="DKAN" install_configure_form.update_status_module="array(FALSE,FALSE)" --yes'
+    cmd:  'drush si dkan --root=docroot  --site-name="DKAN" install_configure_form.update_status_module="array(FALSE,FALSE)" --yes'
     usage: Rebuild all the dkan projects from the drupal-org.make file.
 
   docker-up:
@@ -60,9 +60,9 @@ commands:
     cmd: 'docker-compose run cli bash -c "cd docroot/profiles/dkan/test && bin/behat -p docker {{args}}"'
     usage: Run the DKAN behat tests within the container.
 
-  dkan-remake:
-    cmd: 'docker-compose run cli bash -c "drush -y make --no-core --contrib-destination=./docroot/profiles/dkan/ ./docroot/profiles/dkan/drupal-org.make --no-recursion --concurrency=3"'
-    usage: Run the DKAN behat tests within the container.
+#  dkan-remake:
+#    cmd: 'docker-compose run cli bash -c "drush -y make --no-core --contrib-destination=./docroot/profiles/dkan/ ./docroot/profiles/dkan/drupal-org.make --no-recursion --concurrency=3"'
+#    usage: Run the DKAN behat tests within the container.
 
   behat-init:
     cmd: 'docker-compose run cli bash -c "cd docroot/test && composer install --prefer-source --no-interaction"'
