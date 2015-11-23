@@ -1,7 +1,7 @@
 version: 0.0.0
 commands:
   dkan-build-site:
-    cmd: "ahoy drush -- make --prepare-install drupal-org-core.make docroot --yes && ln -s ../../../dkan docroot/profiles/dkan && ahoy drush -- si minimal --root=docroot --sites-subdir=default --db-url={{args}}"
+    cmd: "ahoy drush -- make --prepare-install drupal-org-core.make docroot --yes && ln -s ../../ docroot/profiles/dkan && ahoy drush -- si minimal --root=docroot --sites-subdir=default --db-url={{args}}"
     usage: 'Builds a fully operational drupal site for dkan development in ./docroot. You must pass in the database url. Note: to install dkan also run dkan-remake and dkan-reinstall.'
 
   dkan-remake:
