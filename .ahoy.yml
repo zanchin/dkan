@@ -5,15 +5,15 @@ commands:
     usage: List the running docker-compose containers.
 
   dkan-build-site:
-    cmd: "drush make --prepare-install drupal-org-core.make docroot --yes && ln -s ../../ docroot/profiles/dkan && drush -y si minimal --root=docroot --sites-subdir=default --db-url={{args}}"
+    cmd: "ahoy drush -- make --prepare-install drupal-org-core.make docroot --yes && ln -s ../../ docroot/profiles/dkan && ahoy drush -- -y si minimal --root=docroot --sites-subdir=default --db-url={{args}}"
     usage: 'Builds a fully operational drupal site for dkan development in ./docroot. You must pass in the database url. Note: to install dkan also run dkan-remake and dkan-reinstall.'
 
   dkan-remake:
-    cmd: 'drush -y make --no-core --contrib-destination=./ "drupal-org.make" --no-recursion --concurrency=3'
+    cmd: 'ahoy drush -- -y make --no-core --contrib-destination=./ "drupal-org.make" --no-recursion --concurrency=3'
     usage: Rebuild all the dkan projects from the drupal-org.make file.
 
   dkan-reinstall:
-    cmd:  'drush si dkan --root=docroot  --site-name="DKAN" install_configure_form.update_status_module="array(FALSE,FALSE)" --yes'
+    cmd:  ahoy drush -- "si dkan --root=docroot  --site-name='DKAN' install_configure_form.update_status_module='array(FALSE,FALSE)' --yes"
     usage: Rebuild all the dkan projects from the drupal-org.make file.
 
   docker-up:
@@ -33,7 +33,7 @@ commands:
     usage: Restart the docker-compose containers.
 
   drush:
-    cmd: "docker exec -it $(docker-compose ps -q cli) bash -c 'drush --root=docroot {{args}}'"
+    cmd: 'docker exec -it $(docker-compose ps -q cli) bash -c "drush --root=docroot {{args}}"'
     usage: Run drush commands in the cli service container.
 
   bash:
@@ -66,4 +66,7 @@ commands:
 
   behat-init:
     cmd: 'docker-compose run cli bash -c "cd docroot/test && composer install --prefer-source --no-interaction"'
+    usage: Use composer to install behat dependencies.
+  vnc:
+    cmd: 'open vnc://$(docker-machine ip default):$(docker port $(docker-compose ps -q browser) 5900 | cut -c9-)'
     usage: Use composer to install behat dependencies.

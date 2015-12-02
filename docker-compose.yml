@@ -15,7 +15,7 @@ web:
     # PHP configuration overrides
     - "./.docker/etc/php5/php.ini:/etc/php5/fpm/conf.d/z_php.ini"
     # Project root folder mapping
-    - &project_root ".:/var/www"
+    - &project_root ".:/var/www/"
   links:
     - db
     # Uncomment this and the memcached service definition below to start using memcached.
@@ -88,13 +88,14 @@ memcached:
 # Uncomment the service definition section below and the link in the web service above to start using selenium2 driver for Behat tests requiring JS support.
 browser:
   hostname: browser
-  image: selenium/standalone-chrome
+  image: selenium/standalone-chrome-debug:2.48.2
   volumes:
     - /dev/shm:/dev/shm
   links:
     - web
-  #ports:
+  ports:
   #  - "4444:4444"
+    - "5900"
 
 solr:
   hostname: solr
