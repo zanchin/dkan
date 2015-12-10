@@ -1,0 +1,8 @@
+version: 0.0.0
+commands:
+  drush:
+    cmd: drush {{args}}
+  dkan:
+    import: dkan/.ahoy/dkan.ahoy.yml
+  confirm:
+    cmd: ahoy -f dkan/.ahoy/utils.ahoy.yml confirm {{args}}
