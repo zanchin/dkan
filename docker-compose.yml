@@ -7,7 +7,7 @@ web:
   image: blinkreaction/drupal-apache-php:2.2-5.5
   environment:
     - VIRTUAL_HOST=dkan.docker
-    - VIRTUAL_PROTO=https
+    #- VIRTUAL_PROTO=https
   ports:
     - "80"
     - "443"

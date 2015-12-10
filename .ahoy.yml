@@ -9,7 +9,7 @@ commands:
     usage: 'Builds a fully operational drupal site for dkan development in ./docroot. You must pass in the database url. Note: to install dkan also run dkan-remake and dkan-reinstall.'
 
   dkan-remake:
-    cmd: 'ahoy drush -- -y make --no-core --contrib-destination=./ "drupal-org.make" --no-recursion --concurrency=3'
+    cmd: 'ahoy drush -- -y make --no-core --contrib-destination=./ "drupal-org.make" --no-recursion --no-cache --overwrite --verbose --working-copy'
     usage: Rebuild all the dkan projects from the drupal-org.make file.
 
   dkan-reinstall:
@@ -35,6 +35,7 @@ commands:
   drush:
     cmd: 'docker exec -it $(docker-compose ps -q cli) bash -c "drush --root=docroot {{args}}"'
     usage: Run drush commands in the cli service container.
+    skipflagparsing: true
 
   bash:
     cmd: "docker exec -it $(docker-compose ps -q {{args}}) bash"
@@ -57,12 +58,9 @@ commands:
     usage: Run the data_starter behat tests within the container.
 
   dkan-behat:
-    cmd: 'docker-compose run cli bash -c "cd docroot/profiles/dkan/test && bin/behat -p docker {{args}}"'
+    cmd: docker exec -it $(docker-compose ps -q cli) bash -c "cd docroot/profiles/dkan/test && bin/behat -p docker {{args}}"
     usage: Run the DKAN behat tests within the container.
-
-#  dkan-remake:
-#    cmd: 'docker-compose run cli bash -c "drush -y make --no-core --contrib-destination=./docroot/profiles/dkan/ ./docroot/profiles/dkan/drupal-org.make --no-recursion --concurrency=3"'
-#    usage: Run the DKAN behat tests within the container.
+    skipflagparsing: true
 
   behat-init:
     cmd: 'docker-compose run cli bash -c "cd docroot/test && composer install --prefer-source --no-interaction"'
