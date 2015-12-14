@@ -137,12 +137,6 @@ projects[admin_menu_source][subdir] = contrib
 projects[menu_token][version] = 1.0-beta5
 projects[menu_token][subdir] = contrib
 
-projects[workbench][version] = 1.2
-projects[workbench][subdir] = contrib
-
-projects[workbench_moderation][version] = 1.4
-projects[workbench_moderation][subdir] = contrib
-
 ; Deprecated
 projects[delta][version] = 3.0-beta11
 
