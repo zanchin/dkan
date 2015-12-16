@@ -1,8 +1,21 @@
-version: 0.0.0
+ahoyapi: v1
+usage: DKAN cli app for development using ahoy.
 commands:
+ # drush:
+ #   usage: Run drush via ahoy (helpful for abstraction)
+ #   cmd: drush {{args}}
   drush:
-    cmd: drush {{args}}
+    usage: Run drush via ahoy (helpful for abstraction)
+    cmd: ahoy docker exec drush {{args}}
   dkan:
+    usage: A series of commands for dkan development.
     import: dkan/.ahoy/dkan.ahoy.yml
   confirm:
+    hide: true
     cmd: ahoy -f dkan/.ahoy/utils.ahoy.yml confirm {{args}}
+  docker:
+    usage: A series of docker commands for dkan development (experimental)
+    import: dkan/.ahoy/docker.ahoy.yml
+  init:
+    cmd: echo "ahoy.yml file already exists."
+    hide: true
