@@ -4,9 +4,9 @@ Feature: Visualization entity embed test.
     #TODO: Works up until adding a visualization, where it cannot find the newly added VE Chart contnet.
     #       Need to ensure that the chart is created by the time the test gets to adding the embed.
   Scenario: Module visualization entity embed enabled by default
-      Given "dkan_data_story" content:
-          | title                           | author      | status   |
-          | DKAN Data Story Test Story Post | admin       | 0        |
+      Given data stories:
+          | title                           | author      | published  |
+          | DKAN Data Story Test Story Post | admin       | Yes        |
       And "ve_chart" content:
           | title                           | author      | status   |
           | Viz Entity Test Chart           | admin       | 0        |
