@@ -40,6 +40,7 @@ function dkan_additional_setup() {
           array('dkan_colorizer_reset', array()),
           array('dkan_misc_variables_set', array()),
           array('dkan_set_adminrole', array()),
+          array('dkan_topics_terms', array()),
       ),
   );
 }
@@ -184,4 +185,66 @@ function dkan_misc_variables_set(&$context) {
 function dkan_set_adminrole(&$context) {
   $context['message'] = t('Setting user admin role');
   dkan_sitewide_roles_perms_set_admin_role();
+}
+
+/**
+ * Adds new terms for the Topics taxonomy with images.
+ *
+ * And, returns [term].
+ */
+function dkan_topics_terms(&$context) {
+  $vocab = taxonomy_vocabulary_machine_name_load('dkan_topics_term');
+  $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocab->vid));
+  foreach ($terms as $term) {
+    taxonomy_term_delete($term->tid);
+  }
+
+  $terms = [
+    'Health', 'Hospital', 'Inpatient',
+    'Medicare', 'State', 'National',
+    'Quality', 'Community', 'Science',
+    'Tech', 'Food', 'Weather',
+  ];
+
+  $return = array();
+  foreach ($terms as $term) {
+    $image = _dkan_topic_image($term);
+    $term = (object) [
+      'name' => $term,
+      'vid' => $vocab->vid,
+    ];
+
+    $term->field_image = array();
+    $term->field_image[LANGUAGE_NONE] = array();
+    $term->field_image[LANGUAGE_NONE][0] = $image;
+    $term->field_image[LANGUAGE_NONE][0]['alt'] = $term->name;
+    taxonomy_term_save($term);
+    $return[$term->name] = $term;
+  }
+  return $return;
+}
+
+/**
+ * Copies term image and returns image definition array for the term.
+ */
+function _dkan_topic_image($term) {
+  $path = drupal_get_path('profile', 'dkan');
+  $filename = $term . '.png';
+  $filepath = $path . '/images/topics/' . $filename;
+  $filepath = drupal_realpath($filepath);
+  $file = (object) [
+    'uid' => 1,
+    'uri' => $filepath,
+    'filemime' => file_get_mimetype($filepath),
+    'status' => 1,
+  ];
+
+  $destination  = 'public://';
+  $destination_fix = 'public://styles/topic_medium/public';
+  file_prepare_directory($destination, FILE_CREATE_DIRECTORY);
+  file_prepare_directory($destination_fix, FILE_CREATE_DIRECTORY);
+
+  file_copy($file, $destination . 'styles/topic_medium/public', FILE_EXISTS_REPLACE);
+  $file = file_copy($file, $destination, FILE_EXISTS_REPLACE);
+  return (array) $file;
 }
