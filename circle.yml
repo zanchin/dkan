@@ -44,9 +44,10 @@ dependencies:
     - 'composer global require --prefer-source --no-interaction drush/drush:8.0.1'
     # Install ahoy
     - 'sudo wget -q https://github.com/devinci-code/ahoy/releases/download/1.1.0/ahoy-`uname -s`-amd64 -O /usr/local/bin/ahoy && sudo chown $USER /usr/local/bin/ahoy && sudo chmod +x /usr/local/bin/ahoy'
-    - 'bash circle-install.sh':
-        pwd:
-          test
+    - 'bash dkan-init.sh'
+    - 'ahoy dkan drupal-rebuild $DATABASE_URL'
+    - 'ahoy dkan remake'
+    - 'ahoy dkan reinstall'
     - 'drush --yes runserver :8888':
         background: true
         pwd: test
