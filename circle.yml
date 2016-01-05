@@ -81,40 +81,40 @@ test:
     - cd dkan/test; bash circle-behat.sh:
         parallel: true
         files:
-          - dkan/test/features/administrator.feature
-          - dkan/test/features/data_dashboard.feature
-          - dkan/test/features/dataset.admin.feature
-          - dkan/test/features/dataset.all.feature
-          - dkan/test/features/dataset.author.feature
-          - dkan/test/features/dataset.editor.feature
-          - dkan/test/features/dataset.feature
-          - dkan/test/features/datastore.feature
-          - dkan/test/features/dkan_data_story_ui.feature
-          - dkan/test/features/editor.feature
+          - test/features/administrator.feature
+          - test/features/data_dashboard.feature
+          - test/features/dataset.admin.feature
+          - test/features/dataset.all.feature
+          - test/features/dataset.author.feature
+          - test/features/dataset.editor.feature
+          - test/features/dataset.feature
+          - test/features/datastore.feature
+          - test/features/dkan_data_story_ui.feature
+          - test/features/editor.feature
           # Gravitar tests are broken.
-          #- dkan/test/features/gravatar.feature
-          - dkan/test/features/group.admin.feature
-          - dkan/test/features/group.all.feature
-          - dkan/test/features/group.author.feature
-          - dkan/test/features/group.editor.feature
-          - dkan/test/features/groups.feature
-          - dkan/test/features/home.feature
-          - dkan/test/features/panels.feature
-          - dkan/test/features/profile.feature
-          - dkan/test/features/recline.feature
-          - dkan/test/features/resource.admin.feature
-          - dkan/test/features/resource.all.feature
-          - dkan/test/features/resource.author.feature
-          - dkan/test/features/resource.editor.feature
-          - dkan/test/features/role_storyteller.feature
-          - dkan/test/features/search.feature
-          - dkan/test/features/user.admin.feature
-          - dkan/test/features/user.all.feature
-          - dkan/test/features/user.author.feature
+          #- test/features/gravatar.feature
+          - test/features/group.admin.feature
+          - test/features/group.all.feature
+          - test/features/group.author.feature
+          - test/features/group.editor.feature
+          - test/features/groups.feature
+          - test/features/home.feature
+          - test/features/panels.feature
+          - test/features/profile.feature
+          - test/features/recline.feature
+          - test/features/resource.admin.feature
+          - test/features/resource.all.feature
+          - test/features/resource.author.feature
+          - test/features/resource.editor.feature
+          - test/features/role_storyteller.feature
+          - test/features/search.feature
+          - test/features/user.admin.feature
+          - test/features/user.all.feature
+          - test/features/user.author.feature
           # Visualization Entity tests are all broken.
           # - test/features/vis_entity_embeds.feature
-          - dkan/test/features/widgets.feature
-          - dkan/test/features/role_storyteller.feature
+          - test/features/widgets.feature
+          - test/features/role_storyteller.feature
    # - cd test; bash features-tests.sh
   post:
     - echo CIRCLE_ARTIFACTS; cp -av assets $CIRCLE_ARTIFACTS:

@@ -3,7 +3,7 @@ error=0
 for var in "$@"
 do
     echo "$var"
-    bin/behat --format=pretty --out=std --format=junit --out=$CIRCLE_ARTIFACTS/junit /home/ubuntu/dkan/$var
+    bin/behat --format=pretty --out=std --format=junit --out=$CIRCLE_ARTIFACTS/junit /home/ubuntu/dkan/dkan/$var
 
     if [ ! $? -eq 0 ]
     then
