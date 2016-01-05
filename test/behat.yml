@@ -44,7 +44,8 @@ default:
     Drupal\DrupalExtension:
       blackbox: ~
       drupal:
-        drupal_root: %paths.base%
+        #TODO Abstract this out.
+        drupal_root: /home/ubuntu/dkan/docroot
       api_driver: 'drupal'
       # @todo fixup these regions for use with new theme. Updated navigation only
       region_map:
