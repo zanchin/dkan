@@ -11,3 +11,7 @@ cp dkan/.ahoy/starter.ahoy.yml .ahoy.yml && echo "Created an initial ahoy file a
 
 echo "A DKAN Drupal site has been initialized. Type 'ahoy' for DKAN commands."
 ahoy || echo "Notice: ahoy is not installed. Follow the instructions at https://github.com/devinci-code/ahoy to install it."
+echo "To complete a dkan installation, run the following commands :"
+echo "  ahoy dkan drupal-rebuild [DB_URL i.e. mysql://user:password@server/database_name]"
+echo "  ahoy dkan remake && "
+echo "  ahoy dkan reinstall && "

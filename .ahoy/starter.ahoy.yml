@@ -1,6 +1,11 @@
 ahoyapi: v1
 usage: DKAN cli app for development using ahoy.
 commands:
+  behat:
+    usage: Run behat via ahoy (helpful for abstraction)
+    cmd: cd docroot/profiles/dkan/test && bin/behat {{args}}
+    # Use this version if using docker.
+    #cmd: ahoy docker exec "cd docroot/profiles/dkan/test && bin/behat -p docker {{args}}"
   drush:
     usage: Run drush via ahoy (helpful for abstraction)
     cmd: drush --root=docroot {{args}}
