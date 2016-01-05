@@ -1,11 +1,13 @@
-#!/bin/bash
-mkdir dkan &&
-#mv !(dkan) dkan/.
-#find . ! -regex '.*/dkan' ! -regex '.' -exec mv '{}' dkan \; &&
-shopt -s extglob dotglob &&
-mv !(dkan) dkan &&
-shopt -u dotglob &&
-# find . ! -regex '.*/dkan' ! -regex '.' -exec echo "'{}'" \; &&
-cp dkan/.ahoy/starter.ahoy.yml .ahoy.yml &&
+#!/usr/bin/env bash
+# This allows us to use !(dkan) to move all the files into the dkan folder without recursion.
+shopt -s extglob dotglob
+
+mkdir dkan 2> /dev/null && echo "Created ./dkan folder.." || echo "DKAN folder already exists.. exiting."
+
+mv !(dkan) dkan && echo "Moved all files into ./dkan.." || echo "Error moving files into ./dkan.. exiting."
+shopt -u dotglob
+
+cp dkan/.ahoy/starter.ahoy.yml .ahoy.yml && echo "Created an initial ahoy file at ./.ahoy.yml based on ./dkan/.ahoy/starter.ahoy.yml. Feel free to customize if you need."
+
 echo "A DKAN Drupal site has been initialized. Type 'ahoy' for DKAN commands."
 which ahoy || echo "Notice: ahoy is not installed. Follow the instructions at https://github.com/devinci-code/ahoy to install it."
