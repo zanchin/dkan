@@ -10,4 +10,4 @@ shopt -u dotglob
 cp dkan/.ahoy/starter.ahoy.yml .ahoy.yml && echo "Created an initial ahoy file at ./.ahoy.yml based on ./dkan/.ahoy/starter.ahoy.yml. Feel free to customize if you need."
 
 echo "A DKAN Drupal site has been initialized. Type 'ahoy' for DKAN commands."
-which ahoy || echo "Notice: ahoy is not installed. Follow the instructions at https://github.com/devinci-code/ahoy to install it."
+ahoy || echo "Notice: ahoy is not installed. Follow the instructions at https://github.com/devinci-code/ahoy to install it."
