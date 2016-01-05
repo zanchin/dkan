@@ -117,7 +117,7 @@ test:
           - test/features/role_storyteller.feature
    # - cd test; bash features-tests.sh
   post:
-    - echo CIRCLE_ARTIFACTS; cp -av assets $CIRCLE_ARTIFACTS:
+    - echo $CIRCLE_ARTIFACTS; cp -av dkan/test/assets $CIRCLE_ARTIFACTS:
         parallel: true
 #    - bundle exec rake jasmine:ci: # add an extra test type
 #        environment:
