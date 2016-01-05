@@ -19,7 +19,13 @@ commands:
     usage: 'Builds a fully operational drupal site for dkan development in ./docroot. You must pass in the database url. Note: to install dkan also run dkan-remake and dkan-reinstall.'
 
   remake:
-    cmd: 'ahoy drush -y make --no-core --contrib-destination=./ dkan/drupal-org.make --no-recursion --no-cache --overwrite --verbose --working-copy'
+    # Note that we tried using --overwrite, but that seems to delete the entire modules/dkan folder which includes both checked-in modules and modules from make.
+    # So, we delete the specific folders.
+    cmd: |
+      rm -rf docroot/profiles/dkan/modules/dkan/dkan_dataset ;
+      rm -rf docroot/profiles/dkan/modules/dkan/dkan_datastore ;
+      rm -rf docroot/profiles/dkan/modules/contrib ;
+      ahoy drush --root=docroot -y make --no-core --contrib-destination=./ dkan/drupal-org.make --no-recursion --no-cache --verbose --working-copy docroot/profiles/dkan
     usage: Rebuild all the dkan projects from the drupal-org.make file.
 
   reinstall:
